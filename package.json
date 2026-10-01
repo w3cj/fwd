@@ -1,0 +1,40 @@
+{
+  "name": "@w3cj/fwd",
+  "version": "0.1.0",
+  "description": "A dead simple zero dependency SSH port forward manager.",
+  "type": "module",
+  "bin": {
+    "fwd": "./bin/fwd.js"
+  },
+  "files": [
+    "README.md",
+    "bin",
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "typecheck": "tsc",
+    "prepublishOnly": "npm run typecheck && npm test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "os": [
+    "!win32"
+  ],
+  "keywords": [
+    "ssh",
+    "port-forward",
+    "tunnel",
+    "controlmaster",
+    "cli"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "typescript": "^7.0.2"
+  }
+}
