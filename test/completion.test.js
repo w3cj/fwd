@@ -16,7 +16,13 @@ before(async () => {
   // The scripts call `fwd __complete`, so fwd has to be on PATH.
   await mkdir(join(dir, 'bin'));
   await symlink(BIN, join(dir, 'bin', 'fwd'));
-  env = { FWD_CONFIG_DIR: join(dir, 'config'), FWD_SSH: '/bin/false', PATH: `${join(dir, 'bin')}:${process.env.PATH}` };
+  env = {
+    FWD_CONFIG_DIR: join(dir, 'config'),
+    FWD_SSH: '/bin/false',
+    PATH: `${join(dir, 'bin')}:${process.env.PATH}`,
+    // Completions must stay plain text even when colour is forced.
+    FORCE_COLOR: '1',
+  };
   await mkdir(env.FWD_CONFIG_DIR);
   const forward = (/** @type {'local' | 'remote'} */ direction, /** @type {number} */ port) => ({
     direction,

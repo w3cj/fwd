@@ -21,6 +21,9 @@ export default {
       const host = typeof flags.host === 'string' ? flags.host : state.defaultHost;
       values = host ? getForwards(state, host).map(listenPort) : [];
     }
-    for (const value of new Set(values)) if (value !== '') console.log(value);
+    // Write strings, not console.log(number): numbers get ANSI colours when
+    // FORCE_COLOR is set, which would end up in the completions.
+    const lines = [...new Set(values.map(String))].filter(Boolean);
+    if (lines.length) process.stdout.write(`${lines.join('\n')}\n`);
   },
 };
